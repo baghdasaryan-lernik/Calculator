@@ -4,25 +4,25 @@ import './Calculator.css'
 
 const Calculator = () => {
 
-const ops = ["/", "*", "+", "-", "."]
+const operators = ["/", "*", "+", "-", "."]
 
 const [expression, setExpression] = useState("")
-const [result, setResult] = useState("")
-
-
 
 const updateExpression = (value) =>{
   
-  for(let i of ops){
-    if(ops.includes(value) && expression[expression.length-1] == i) return
+  if(expression.length >= 32) return
+
+  for(let i of operators){
+    if(operators.includes(value) && expression[expression.length-1] == i) return
   }
   
+
   setExpression(expression + value)
+
 } 
 
 const estimateExpression = () => {
-    setResult(result + eval(expression))
-    setExpression(result)
+    setExpression(`${eval(expression)}`)
 }
 
   const digitCreator = () => {
@@ -44,7 +44,7 @@ const estimateExpression = () => {
     <div className="container">
       <div className="calculator">
        <div className="screen">
-         <p>{expression}</p><span>{result}</span>
+         <h3>{expression || "0"}</h3>
 
       </div>
       <div className="operators">
